@@ -2,6 +2,6 @@
 set -e
 PORT=${PORT:-8082}
 
-./generate_config.py
+#./generate_config.py
 
 luigid --port "$PORT"

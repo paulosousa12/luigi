@@ -21,8 +21,7 @@ RUN pip install 'luigi==2.4.0' 'sqlalchemy==1.1.0' 'psycopg2==2.6.2'
 RUN mkdir /etc/luigi && chmod -R a+rw /etc/luigi
 
 COPY scripts/ .
-RUN chmod +x generate_config.py && chmod +x run.sh && mv run.sh /usr/bin
-
-USER luigi
+RUN luigid --port 8082
+# RUN chmod +x generate_config.py && chmod +x run.sh && mv run.sh /usr/bin
 
 CMD ["run.sh"]

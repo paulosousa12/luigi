@@ -1,4 +1,5 @@
-version: '2'
+version: '3.7'
+
 services:
   scheduler:
     image: spiside/luigi:latest
@@ -7,11 +8,12 @@ services:
     environment:
       LUIGI_TASK_HISTORY_DB_CONNECTION: postgres://luigi@db/dev
       LUIGI_SCHEDULER_RECORD_TASK_HISTORY: "true"
-    depends_on:
-      - db
     entrypoint:
       - ./wait-for-postgres.sh
       - db
+    networks:
+      - pipeline
+
   worker:
     build:
       dockerfile: docker/Dockerfile.worker
@@ -23,6 +25,9 @@ services:
       LUIGI_CORE_DEFAULT-SCHEDULER-URL: http://scheduler:8082
     depends_on:
       - scheduler
+    networks:
+      - pipeline
+
   db:
     image: postgres:9.5.4
     ports:
@@ -30,3 +35,10 @@ services:
     environment:
       POSTGRES_USER: luigi
       POSTGRES_DB: dev
+    networks:
+      - pipeline
+      - api
+
+networks:
+  pipeline:
+  api:

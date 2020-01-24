@@ -12,3 +12,5 @@
 #
 #   * * 0 1,3,4 * luigi python -m src.tasks.example_task ExampleTask --workers 4
 
+*/1 * * * * luigi --module src.tasks.crontask CronTask
+

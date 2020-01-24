@@ -9,7 +9,13 @@ WORKDIR luigi/
 
 RUN pip install -r requirements.txt
 
-ENV PYTHONPATH /luigi
-COPY docker/run_worker.sh /usr/bin/run_worker
+USER root
+#RUN sudo apt-get update && apt-get -y install cron
+COPY crontab /etc/cron.d/luigi
+COPY docker/base/config/luigi.cfg /etc/luigi/luigi.cfg
+RUN chmod 0644 /etc/cron.d/luigi
+RUN crontab /etc/cron.d/luigi
 
-CMD ["run_worker"]
+ENV PYTHONPATH /luigi
+
+CMD ["cron", "-f"]
