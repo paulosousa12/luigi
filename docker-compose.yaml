@@ -1,8 +1,21 @@
 version: '3.7'
 
 services:
+  db:
+    image: postgres:9.5.4
+    ports:
+    - "5433:5432"
+    environment:
+      POSTGRES_USER: luigi
+      POSTGRES_DB: dev
+    networks:
+    - pipeline
+    - api
+
   scheduler:
-    image: spiside/luigi:latest
+    build:
+      dockerfile: scheduler/Dockerfile
+      context: .
     ports:
       - "8082:8082"
     environment:
@@ -16,7 +29,7 @@ services:
 
   worker:
     build:
-      dockerfile: docker/Dockerfile.worker
+      dockerfile: worker/Dockerfile
       context: .
     hostname: worker
     volumes:
@@ -28,16 +41,6 @@ services:
     networks:
       - pipeline
 
-  db:
-    image: postgres:9.5.4
-    ports:
-      - "5433:5432"
-    environment:
-      POSTGRES_USER: luigi
-      POSTGRES_DB: dev
-    networks:
-      - pipeline
-      - api
 
 networks:
   pipeline:

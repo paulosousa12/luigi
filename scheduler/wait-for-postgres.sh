@@ -16,4 +16,4 @@ until psql -h "$host" -U "postgres" -c '\l'; do
 
     >&2 echo "Postgres is up - executing command"
 
-exec "run.sh"
+exec "/scheduler/run.sh"

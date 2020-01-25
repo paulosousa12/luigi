@@ -1,36 +1,29 @@
 # Luigi with Docker
 
 ```
-______██████████████
--____██▓▓▓▓▓▓▓▓▓ L ▓████
--__██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██
--__██████░░░░██░░██████
-██░░░░████░░██░░░░░░░░██
-██░░░░████░░░░██░░░░░░██
--__████░░░░░░██████████
--__██░░░░░░░░░░░░░██
-_____██░░░░░░░░░██
--______██░░░░░░██
--____██▓▓████▓▓▓█
--_██▓▓▓▓▓▓████▓▓█
-██▓▓▓▓▓▓███░░███░
--__██░░░░░░███████
--____██░░░░███████
--______██████████
--_____██▓▓▓▓▓▓▓▓▓██
--_____█████████████
+________
+/       _\
+|      (L|
+|________|___
+| _/     |
+||  (o)  |_
+| \        )
+| |   ___|
+L/    \__|
+|     ___|
+\________/
 
 A tool for creating a Luigi docker development and production environment with a single
 scheduler and workers. 
+Based on https://github.com/spiside/docker-luigi. This project contains also:
+- Working task example
+- Working Cronjob configuration with a task running every minute
 ```
 
 ## Setup
 
 Before starting the cluster you will need to install docker
-(docker-engine >= 0.10.0) and docker-compose. If you already have these
-installed, you can skip to [Getting Started](#getting-started).
-
-Luigi is set to version 2.4.0 using Python 3.5.2.
+(docker-engine >= 0.10.0) and docker-compose. 
 
 ### Setting up Docker
 
